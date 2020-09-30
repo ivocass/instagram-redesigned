@@ -1,0 +1,341 @@
+:root {
+	--dark-mode-filter: unset;
+}
+
+/* these two fix an actual Instagram bug, where usernames under a story circle need
+an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
+.ku8Bn {
+	height: 85px !important;
+	margin-left: -5px;
+}
+.eebAO.h_uhZ {
+	line-height: 15px;
+	height: 16px;
+}
+
+/* app background */
+.SCxLW.o64aR {
+	background-color: #f1f1f1;
+}
+
+/* navigation bar */
+._lz6s.Hz2lF {
+	border-bottom: none;
+	box-shadow: 0 3px 6px rgb(0 0 0 / 0.1), 0 3px 6px rgb(90 90 90 / 10%);
+}
+
+/* nav bar search container */
+.LWmhU._0aCwM {
+	height: 34px;
+}
+
+/* nav bar search background */
+.pbgfb.Di7vw {
+	border: none;
+	background-color: #f1f1f1;
+	height: 34px;
+	border-radius: 12px;
+}
+
+/* search background when searching */
+.XTCLo.x3qfX {
+	border: none;
+	background: #f1f1f1;
+	border-radius: 10px;
+}
+
+/* search icon when searching */
+.mlrQa.coreSpriteSearchIcon {
+	top: 13px;
+}
+
+/* close search button */
+.aIYm8.coreSpriteSearchClear {
+	top: 7px;
+}
+
+/* nav bar right-side buttons container */
+._47KiJ {
+	align-items: center;
+}
+
+/* stories box */
+.zGtbP.IPQK5.VideM {
+	border: none;
+	border-bottom: none;
+	background: none;
+	padding: 0;
+	left: -3px;
+}
+
+/* story circle */
+.RR-M-.QN629:hover {
+	border-radius: 50%;
+	box-shadow: -1px 3px 6px 3px rgb(117 117 117 / 50%);
+
+	transform: scale(1.05);
+	transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* story image */
+._2dbep {
+	box-shadow: 0px 0px 0 2px #f1f1f1;
+}
+
+/* prev & next stories buttons */
+.POSa_.oevZr,
+._6CZji.oevZr {
+	display: none;
+}
+
+/* main content container */
+._1SP8R.C3uDN.j9XKR {
+	max-width: 645px !important;
+}
+
+/* posts column */
+.cGcGK {
+	max-width: 645px !important;
+	margin-right: 0 !important;
+}
+
+/* suggestions column */
+.COOzN.MnWb5.YT6rB {
+	display: none !important;
+}
+
+/* post */
+article._8Rm4L {
+	border: none !important;
+	border-radius: 15px !important;
+	box-shadow: 0 3px 6px rgb(0 0 0 / 0.1), 0 3px 6px rgb(90 90 90 / 10%);
+}
+
+/* suggestions box */
+._8Rm4L.vboSt._6E_wP.ccgHY.GZkEI {
+	border-radius: 15px !important;
+}
+
+.custom-stories-button {
+	position: absolute;
+	top: 46px;
+	width: 35px;
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.custom-stories-button:hover {
+	background-color: white;
+}
+
+.custom-stories-button.disabled {
+	cursor: default;
+	background: none;
+}
+
+#custom-prev-stories-button {
+	left: calc(50% - 365px);
+	transform: rotate(180deg);
+}
+
+#custom-prev-stories-button-img {
+	opacity: 0.4;
+}
+
+#custom-next-stories-button {
+	left: calc(50% + 330px);
+}
+
+.custom-stories-button-img {
+	position: relative;
+	left: 1px;
+}
+
+.fade-in {
+	animation: fade-in ease 0.5s;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+#open-media-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	position: absolute;
+	right: 12px;
+	top: 12px;
+	width: 28px;
+	height: 28px;
+	background-color: #323232;
+	border: none;
+	cursor: pointer;
+}
+
+#toggle-dark-theme-button {
+	display: flex;
+	align-items: center;
+	height: 37px;
+
+	background: none;
+	border: none;
+	text-align: left;
+	padding-left: 16px;
+	cursor: pointer;
+}
+
+#toggle-dark-theme-button img {
+	width: 16px;
+	height: 16px;
+	padding-right: 12px;
+}
+
+#toggle-dark-theme-button:hover {
+	background-color: #fafafa;
+}
+
+/* ---- dark theme ---- */
+
+.dark-theme main,
+/* chats main bg */
+.dark-theme .t30g8.L1C6I {
+	background-color: #e6e6e6 !important;
+}
+
+/* navigation bar */
+.dark-theme ._lz6s.Hz2lF,
+/* Home post */
+.dark-theme article._8Rm4L {
+	box-shadow: 0 3px 6px rgba(255, 255, 255, 0.52), 0 3px 6px rgba(255, 255, 255, 0.2);
+}
+
+/* Home post */
+.dark-theme article._8Rm4L {
+	background-color: #f7f7f7;
+}
+
+.dark-theme .custom-stories-button {
+	background-color: unset;
+}
+
+/* invert everything targeting the html, then invert again the elements that shouldn't be inverted*/
+html,
+img,
+video,
+iframe,
+.uTSKe,
+/* span in direct messages */
+.R19PB,
+/* notification lines in chats */
+h1._7UhW9,
+/* chat message liked icon */
+div.Xn4Qt,
+/* logo */
+.cq2ai,
+.custom-stories-button,
+/* hover overlay of post in profile grid*/
+.qn-0x,
+.mediatypesSpriteCarousel__filled__32,
+/* profile igtv video */
+div .lVhHa.RNL1l,
+/* profile saved story caption */
+div.eXle2,
+/* profile description */
+div.-vDIg span,
+/* post text */
+div.C4VMK,
+.Jv7Aj.mArmR.MqpiF,
+/* username hover popup card image */
+.ZwOlu,
+/* fullscreen post close button */
+._8-yf5,
+/* post comments */
+._8Pl3R {
+	filter: var(--dark-mode-filter);
+}
+
+/* profile saved story caption */
+.dark-theme div.eXle2,
+/* profile description */
+.dark-theme div.-vDIg span,
+/* post text */
+.dark-theme div.C4VMK,
+/* post username */
+.dark-theme .FPmhX ,
+/* post comments */
+.dark-theme ._8Pl3R {
+	color: white !important;
+}
+
+/* svg */
+.dark-theme ._8-yf5 {
+	fill: white;
+}
+
+/* post description username */
+.dark-theme .sqdOP.yWX7d._8A5w5.ZIAjV {
+	color: black;
+}
+
+/* post description hashtags and user mentions*/
+.dark-theme .C4VMK a,
+.dark-theme ._8Pl3R a {
+	color: #65b7ff;
+}
+
+.dark-theme section._9eogI._01nki.lXJWB {
+	filter: invert(1) hue-rotate(180deg);
+}
+
+/* prevent images and videos in stories from being inverted */
+.dark-theme section._9eogI._01nki.lXJWB img,
+.dark-theme section._9eogI._01nki.lXJWB video {
+	filter: inherit;
+}
+
+.dark-theme header.Ppjfr.UE9AK.wdOqh a.sqdOP.yWX7d._8A5w5.ZIAjV {
+	color: white;
+}
+
+/* full-screen dialog blocker background */
+.dark-theme .RnEpo.Yx5HN,
+/* full-screen post blocker background */
+.dark-theme .zZYga {
+	background-color: #f7f7f782;
+}
+
+.dark-theme #open-media-button {
+	background-color: #c8c8c8;
+}
+
+.dark-theme .RR-M-.QN629:hover {
+	box-shadow: -1px 3px 16px 3px rgba(255, 255, 255, 0.53);
+}
+
+/* profile name */
+h1._7UhW9,
+#toggle-dark-theme-button img,
+/* profile followed by */
+._32eiM {
+	filter: initial;
+}
+
+/* fullscreen post */
+.dark-theme ._2dDPU.RnrQH.CkGkG {
+	background-color: #c7c7c7;
+}
+
+/* ---- dark theme ---- */
