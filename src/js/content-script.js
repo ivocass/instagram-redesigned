@@ -297,15 +297,11 @@ function updateButtonStyle(realBtnClass, buttonImgId) {
 function toggleDarkTheme() {
 	if (document.body.classList.contains("dark-theme")) {
 		document.body.classList.remove("dark-theme");
-		document.documentElement.style.setProperty("--dark-mode-filter", "unset");
 
 		localStorage.setItem(DARK_MODE_ITEM_KEY, "false");
 	} else {
 		document.body.classList.add("dark-theme");
-		document.documentElement.style.setProperty(
-			"--dark-mode-filter",
-			"invert(1) hue-rotate(180deg)"
-		);
+
 		localStorage.setItem(DARK_MODE_ITEM_KEY, "true");
 	}
 }

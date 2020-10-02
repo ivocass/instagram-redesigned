@@ -1,7 +1,3 @@
-:root {
-	--dark-mode-filter: unset;
-}
-
 /* these two fix an actual Instagram bug, where usernames under a story circle need
 an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
 .ku8Bn {
@@ -180,7 +176,7 @@ article._8Rm4L {
 	top: 12px;
 	width: 28px;
 	height: 28px;
-	background-color: #323232;
+	background-color: #010f1b;
 	border: none;
 	cursor: pointer;
 }
@@ -209,133 +205,186 @@ article._8Rm4L {
 
 /* ---- dark theme ---- */
 
+.dark-theme {
+	--dark-surface: #080808;
+	--border-color: #262626;
+	--main-background-color: #191919;
+}
+
 .dark-theme main,
 /* chats main bg */
-.dark-theme .t30g8.L1C6I {
-	background-color: #e6e6e6 !important;
+.dark-theme .t30g8.L1C6I,
+/* full screen post */
+.dark-theme ._2dDPU.RnrQH.CkGkG,
+/* user avatar */
+.dark-theme ._2dbep {
+	background-color: var(--main-background-color) !important;
+}
+
+/* story image */
+.dark-theme ._2dbep {
+	box-shadow: 0px 0px 0 2px var(--main-background-color);
 }
 
 /* navigation bar */
 .dark-theme ._lz6s.Hz2lF,
 /* Home post */
 .dark-theme article._8Rm4L {
-	box-shadow: 0 3px 6px rgba(255, 255, 255, 0.52), 0 3px 6px rgba(255, 255, 255, 0.2);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.52), 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Home post */
-.dark-theme article._8Rm4L {
-	background-color: #f7f7f7;
+.dark-theme article._8Rm4L,
+/* navigation bar */
+.dark-theme ._lz6s.Hz2lF,
+/* report options */
+.dark-theme ._1XyCr,
+/* search results menu */
+.dark-theme .fuqBx,
+/* username hover card */
+.dark-theme .DPiy6.Igw0E.IwRSH.eGOV_._4EzTm,
+.dark-theme article.M9sTE,
+/* nav bar user menu */
+.dark-theme ._01UL2,
+.dark-theme div.uo5MA,
+/* chat messages bg */
+.dark-theme .DPiy6.Igw0E.IwRSH.eGOV_.vwCYk,
+/* chats list header */
+.dark-theme .S-mcP,
+/* chats list footer */
+.dark-theme .Igw0E.rBNOH.YBx95._4EzTm.HVWg4,
+/* private account header */
+.dark-theme ._4Kbb_._54f4m,
+/* suggestions item */
+.dark-theme .Igw0E.rBNOH.eGOV_._4EzTm.L-sTb.HcJZg,
+/* suggestions */
+.dark-theme .tHaIX.Igw0E.IwRSH.eGOV_.vwCYk.HcJZg,
+/* chats list hidden bg */
+.dark-theme div.N9abW,
+.dark-theme footer,
+/* activity menu */
+.dark-theme .Fh4P2,
+/* get mobile app promo */
+.dark-theme div.JLbVX,
+/* settings main panel */
+.dark-theme .BvMHM.EzUlV.XfvCs {
+	background-color: var(--dark-surface);
+}
+
+/* comment report btn, profile options btn*/
+.dark-theme button.wpO6b,
+.dark-theme ._4l6NB {
+	background: none;
+}
+
+/* outgoing chat message */
+.dark-theme ._6FEQj.CMoMH.RQUXn._8_yLp {
+	background-color: #1a1a1a;
+}
+
+/* chat reaction */
+.dark-theme ._31sg7._9BIwZ {
+	background-color: #2f2f2f;
+}
+
+/* nav bar user menu */
+.dark-theme div.uo5MA {
+	box-shadow: 0 0px 6px rgba(128, 128, 128, 0.41), 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* search results menu item */
+.dark-theme .yCE8d,
+.dark-theme section,
+.dark-theme header {
+	border-color: var(--border-color);
+}
+
+/* search results menu button hovered */
+.dark-theme .yCE8d.JvDyy,
+/* current chat */
+.dark-theme .QOqBd.Igw0E.IwRSH.eGOV_._4EzTm {
+	background-color: #1a1a1a;
 }
 
 .dark-theme .custom-stories-button {
 	background-color: unset;
 }
 
-/* invert everything targeting the html, then invert again the elements that shouldn't be inverted*/
-html,
-img,
-video,
-iframe,
-.uTSKe,
-/* span in direct messages */
-.R19PB,
-/* notification lines in chats */
-h1._7UhW9,
-/* chat message liked icon */
-div.Xn4Qt,
-/* logo */
-.cq2ai,
-.custom-stories-button,
-/* hover overlay of post in profile grid*/
-.qn-0x,
-.mediatypesSpriteCarousel__filled__32,
-/* profile igtv video */
-div .lVhHa.RNL1l,
-/* profile saved story caption */
-div.eXle2,
-/* profile description */
-div.-vDIg span,
-/* post text */
-div.C4VMK,
-.Jv7Aj.mArmR.MqpiF,
-/* username hover popup card image */
-.ZwOlu,
-/* fullscreen post close button */
-._8-yf5,
-/* post comments */
-._8Pl3R {
-	filter: var(--dark-mode-filter);
+/* nav bar user menu button */
+.dark-theme a.-qQT3:hover,
+/* log out button */
+.dark-theme div.-qQT3:hover,
+/* settings left panel btn */
+.dark-theme .h-aRd.fuQUr:hover {
+	background-color: #1a1a1a;
 }
 
-/* profile saved story caption */
-.dark-theme div.eXle2,
-/* profile description */
-.dark-theme div.-vDIg span,
-/* post text */
-.dark-theme div.C4VMK,
-/* post username */
-.dark-theme .FPmhX ,
-/* post comments */
-.dark-theme ._8Pl3R {
+/* shadow below log out button */
+.dark-theme .TOh1s {
+	display: none;
+}
+
+.dark-theme #toggle-dark-theme-button:hover,
+/* multiple users chat chip */
+.dark-theme div._6Rvw2._6YLdr {
+	background-color: #1a1a1a;
+}
+
+/* search bar bg */
+.dark-theme .XTCLo.x3qfX,
+.dark-theme .pbgfb.Di7vw {
+	background-color: #1a1a1a;
+}
+
+/* report buttons */
+.dark-theme button.aOOlW,
+.dark-theme div {
+	border-color: var(--border-color);
+}
+
+/* logo */
+.dark-theme .s4Iyt,
+.dark-theme .custom-stories-button,
+.dark-theme #toggle-dark-theme-button img,
+/* nav bar user menu arrow */
+.dark-theme .AvhYw.nLL4f,
+/* suggestions paging button */
+.dark-theme .Kf8kP.coreSpritePagingChevron,
+.dark-theme .glyphsSpriteDirect__outline__96,
+.dark-theme .felixSpriteProfileChannelNullState,
+.dark-theme .glyphsSpriteCamera__outline__24__grey_9,
+.dark-theme .coreSpriteTaggedNull,
+.dark-theme .coreSpriteSaveNull {
+	filter: invert(1);
+}
+
+/* overlay blocker */
+.dark-theme .RnEpo.Yx5HN {
+	background-color: #1c1c1ca3;
+}
+
+.dark-theme a,
+.dark-theme span,
+.dark-theme div,
+.dark-theme button,
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme h4,
+.dark-theme label,
+.dark-theme p {
 	color: white !important;
 }
 
-/* svg */
-.dark-theme ._8-yf5 {
+/* hashtags in comments */
+.dark-theme a.xil3i {
+	color: #51bde8 !important;
+}
+
+.dark-theme svg {
 	fill: white;
-}
-
-/* post description username */
-.dark-theme .sqdOP.yWX7d._8A5w5.ZIAjV {
-	color: black;
-}
-
-/* post description hashtags and user mentions*/
-.dark-theme .C4VMK a,
-.dark-theme ._8Pl3R a {
-	color: #65b7ff;
-}
-
-.dark-theme section._9eogI._01nki.lXJWB {
-	filter: invert(1) hue-rotate(180deg);
-}
-
-/* prevent images and videos in stories from being inverted */
-.dark-theme section._9eogI._01nki.lXJWB img,
-.dark-theme section._9eogI._01nki.lXJWB video {
-	filter: inherit;
-}
-
-.dark-theme header.Ppjfr.UE9AK.wdOqh a.sqdOP.yWX7d._8A5w5.ZIAjV {
-	color: white;
-}
-
-/* full-screen dialog blocker background */
-.dark-theme .RnEpo.Yx5HN,
-/* full-screen post blocker background */
-.dark-theme .zZYga {
-	background-color: #f7f7f782;
-}
-
-.dark-theme #open-media-button {
-	background-color: #c8c8c8;
-}
-
-.dark-theme .RR-M-.QN629:hover {
-	box-shadow: -1px 3px 16px 3px rgba(255, 255, 255, 0.53);
-}
-
-/* profile name */
-h1._7UhW9,
-#toggle-dark-theme-button img,
-/* profile followed by */
-._32eiM {
-	filter: initial;
-}
-
-/* fullscreen post */
-.dark-theme ._2dDPU.RnrQH.CkGkG {
-	background-color: #c7c7c7;
 }
 
 /* ---- dark theme ---- */
