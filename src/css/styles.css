@@ -267,7 +267,8 @@ article._8Rm4L {
 /* get mobile app promo */
 .dark-theme div.JLbVX,
 /* settings main panel */
-.dark-theme .BvMHM.EzUlV.XfvCs {
+.dark-theme .BvMHM.EzUlV.XfvCs,
+.dark-theme .NP414.ccgHY.GZkEI {
 	background-color: var(--dark-surface);
 }
 
@@ -354,6 +355,8 @@ article._8Rm4L {
 .dark-theme .felixSpriteProfileChannelNullState,
 .dark-theme .glyphsSpriteCamera__outline__24__grey_9,
 .dark-theme .coreSpriteTaggedNull,
+.dark-theme .glyphsSpriteFriend_Follow,
+.dark-theme .coreSpriteDropdownArrowGrey9,
 .dark-theme .coreSpriteSaveNull {
 	filter: invert(1);
 }
