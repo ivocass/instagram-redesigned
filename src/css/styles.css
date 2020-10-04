@@ -268,7 +268,9 @@ article._8Rm4L {
 .dark-theme div.JLbVX,
 /* settings main panel */
 .dark-theme .BvMHM.EzUlV.XfvCs,
-.dark-theme .NP414.ccgHY.GZkEI {
+.dark-theme .NP414.ccgHY.GZkEI,
+/* home suggested friends box */
+.dark-theme div._8Rm4L {
 	background-color: var(--dark-surface);
 }
 
