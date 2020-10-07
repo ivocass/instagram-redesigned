@@ -1,6 +1,6 @@
 {
 	"name": "Instagram Redesigned",
-	"version": "0.0.0.4",
+	"version": "0.0.0.5",
 	"description": "A new, modern look for Instagram web",
 	"permissions": ["storage"],
 	"browser_action": {
