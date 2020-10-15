@@ -272,8 +272,10 @@ article._8Rm4L {
 /* home suggested friends box */
 .dark-theme div._8Rm4L,
 /* live chat */
-header.inl0k,
-section.gwgGR {
+.dark-theme header.inl0k,
+.dark-theme section.gwgGR,
+/* followers and following modal */
+.dark-theme .PZuss {
 	background-color: var(--dark-surface);
 }
 
