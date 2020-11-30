@@ -24,6 +24,7 @@ function init() {
 	// use the timer only when the tab is active
 	window.addEventListener("focus", addInterval);
 	window.addEventListener("blur", removeInterval);
+	addEventListener("keydown", navigateBetweenPosts);
 
 	addInterval();
 
@@ -304,4 +305,75 @@ function toggleDarkTheme() {
 
 		localStorage.setItem(DARK_MODE_ITEM_KEY, "true");
 	}
+}
+
+/**
+ * Listen for the keys J and K on the homepage, then scroll to the next or previous post.
+ */
+function navigateBetweenPosts(e){
+
+	const key = e.key.toUpperCase();
+	
+	// ignore input fields, only work on the homepage and for letters J and K
+	if (e.target.tagName === "TEXTAREA" || window.location.pathname !== '/' || 
+	(key !== 'J' && key !== 'K')) {
+		
+        return;
+	}
+
+	let posts = document.querySelectorAll('article');
+
+	let targetPost = key === 'J'? getNextPost(posts) : getPrevPost(posts);
+
+	if (!targetPost) {
+        return;
+	}
+	
+	let rect = targetPost.getBoundingClientRect();
+
+	let targetY = rect.top + window.pageYOffset - 60;	
+
+	window.scrollTo({
+		top: targetY,
+		left: 0,
+		behavior: 'smooth'
+		});
+
+}
+
+/**
+ * return the first post that has its top above the navbar
+ */
+function getPrevPost(posts){
+
+	for(let i = posts.length - 1; i > -1; i--){
+
+		let post = posts[i];
+
+		var rect = post.getBoundingClientRect();
+
+		if (rect.top < 59) {
+			return post;
+		}
+	}
+
+	return null;
+}
+
+/**
+ * return the first post that has its top below the navbar
+ */
+function getNextPost(posts){
+
+	for(post of posts){
+
+		var rect = post.getBoundingClientRect();
+
+		if (rect.top > 61){
+			return post;
+		}
+
+	}
+
+	return null;
 }
