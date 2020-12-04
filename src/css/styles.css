@@ -181,6 +181,11 @@ article._8Rm4L {
 	cursor: pointer;
 }
 
+#open-media-button.story {
+	right: 22px;
+	top: 66px;
+}
+
 #toggle-dark-theme-button {
 	display: flex;
 	align-items: center;

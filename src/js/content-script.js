@@ -131,15 +131,15 @@ function removeInterval() {
 
 function mouseOverListener(e) {
 	// check if we should add or remove the open media button when viewing a story
-	if (window.location.pathname.indexOf("/stories/") === 0) {
-		let storyContainer = document.querySelector(".GHEPc");
-
+	if (window.location.pathname.startsWith("/stories/")) {
+		let storyContainer = document.querySelector(".Cd8X1");
+		
 		if (!storyContainer) {
 			return;
 		}
 
 		let bounds = storyContainer.getBoundingClientRect();
-
+		
 		// if we're inside the bounds of the story media (bounds increased by one pixel to make
 		// sure it works)
 		if (
@@ -148,12 +148,17 @@ function mouseOverListener(e) {
 			e.clientY >= bounds.top - 1 &&
 			e.clientY <= bounds.bottom + 1
 		) {
+			
 			// if we're over the story media and the button is not added
 			if (!storyContainer.contains(openMediaButton)) {
+				
 				storyContainer.appendChild(openMediaButton);
+				openMediaButton.classList.add('story');
 			}
 		} else {
+			
 			if (openMediaButton.parentElement) {
+				
 				openMediaButton.parentElement.removeChild(openMediaButton);
 			}
 		}
@@ -174,6 +179,7 @@ function mouseOverListener(e) {
 	// if hovering a post with an image or a post with a video
 	if (e.target.classList.contains("_9AhH0") || e.target.classList.contains("fXIG0")) {
 		e.target.appendChild(openMediaButton);
+		openMediaButton.classList.remove('story');
 	} else {
 		if (openMediaButton.parentElement) {
 			openMediaButton.parentElement.removeChild(openMediaButton);
@@ -187,7 +193,7 @@ function openMediaButtonClickListener(e) {
 
 	// if viewing a story
 	if (window.location.pathname.indexOf("/stories/") === 0) {
-		let grandParent = document.querySelector(".GHEPc");
+		let grandParent = document.querySelector(".Cd8X1");
 
 		if (grandParent) {
 			// assume the story contains a video, so search for a 'source' element
