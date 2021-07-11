@@ -9,6 +9,11 @@ an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
 	height: 16px;
 }
 
+/* fixes an instagram bug where the quick search results dropdown is covering the search input */
+.drKGC {
+	top: 45px !important;
+}
+
 /* app background */
 .SCxLW.o64aR {
 	background-color: #f1f1f1;
@@ -287,6 +292,28 @@ article._8Rm4L {
 	background-color: var(--dark-surface);
 }
 
+/* full screen media date and comment input section */
+.dark-theme .X3Xaj,
+/* full screen media comments section */
+.dark-theme .VHMG0,
+/* full screen media header right */
+.dark-theme ._6aANl,
+/* full screen media header left */
+.dark-theme .Ppjfr.C-A2M._3jv2A ,
+/* full screen media header options div */
+.dark-theme .M6PK7,
+/* full screen media footer */
+.dark-theme .ltpMr._96JFA.t6Mad,
+/* full screen media likes area */
+.dark-theme .EDfFK.-psZt {
+	background-color: #151515;
+}
+
+/* full screen media overlay blocker */
+.dark-theme ._2dDPU._4RgK.CkGkG {
+	background-color: rgba(0, 0, 0, 0.91);
+}
+
 /* comment report btn, profile options btn*/
 .dark-theme button.wpO6b,
 .dark-theme ._4l6NB {
@@ -374,6 +401,11 @@ article._8Rm4L {
 .dark-theme .coreSpriteDropdownArrowGrey9,
 .dark-theme .coreSpriteSaveNull {
 	filter: invert(1);
+}
+
+/* logo in stories. target logo class inside link (which only happens in story mode)*/
+.dark-theme a > .s4Iyt {
+	filter: invert(0);
 }
 
 /* overlay blocker */

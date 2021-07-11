@@ -24,7 +24,7 @@ function init() {
 	// use the timer only when the tab is active
 	window.addEventListener("focus", addInterval);
 	window.addEventListener("blur", removeInterval);
-	addEventListener("keydown", navigateBetweenPosts);
+	addEventListener("keydown", keydownListener);
 
 	addInterval();
 
@@ -210,7 +210,14 @@ function openMediaButtonClickListener(e) {
 				let img = grandParent.querySelector("img");
 
 				if (img) {
-					window.open(img.src);
+
+					// if the image is being cropped into a square, use the first srcset url instead
+					if (img.src.includes('/e35/c0.')) {
+						window.open(img.srcset.slice(0,img.srcset.indexOf(' ')));
+					}
+					else{
+						window.open(img.src);
+					}
 				}
 			}
 		}
@@ -315,21 +322,33 @@ function toggleDarkTheme() {
 
 /**
  * Listen for the keys J and K on the homepage, then scroll to the next or previous post.
+ * Also listen for M (to toggle sound in stories)
  */
-function navigateBetweenPosts(e){
+function keydownListener(e){
 
 	const key = e.key.toUpperCase();
+
+	if (key === 'M' && window.location.pathname.startsWith("/stories/") && 
+	e.target.tagName !== "TEXTAREA" &&
+	e.target.tagName !== 'INPUT'){
+		
+		
+		toggleStoryMute()
+		return;
+	}
 	
-	// ignore input fields, only work on the homepage and for letters J and K
-	if (e.target.tagName === "TEXTAREA" || window.location.pathname !== '/' || 
-	(key !== 'J' && key !== 'K')) {
+	// ignore input fields, only work on the homepage and for letters J,K,F,D
+	if (e.target.tagName === "TEXTAREA" || 
+		e.target.tagName === 'INPUT' || 
+		window.location.pathname !== '/' || 
+		(key !== 'J' && key !== 'K' && key !== 'F' && key !== 'D')) {
 		
         return;
 	}
 
 	let posts = document.querySelectorAll('article');
 
-	let targetPost = key === 'J'? getNextPost(posts) : getPrevPost(posts);
+	let targetPost = (key === 'J' || key === 'F') ? getNextPost(posts) : getPrevPost(posts);
 
 	if (!targetPost) {
         return;
@@ -345,6 +364,42 @@ function navigateBetweenPosts(e){
 		behavior: 'smooth'
 		});
 
+}
+
+
+function toggleStoryMute(){
+
+	// we use this technique instead of targetting css classes because the classes will eventually
+	// change.
+	let el = document.querySelector('header');
+
+	if (!el) {
+		console.warn('toggleStoryMute() - header not found')
+		return;
+	}
+
+	el = el.childNodes[1];
+
+	if (!el) {
+		console.warn('toggleStoryMute() - header child not found')
+		return;
+	}
+
+	el = el.childNodes[1];
+
+	if (!el) {
+		console.warn('toggleStoryMute() - header grandchild not found')
+		return;
+	}
+
+	el = el.childNodes[1];
+
+	if (!el) {
+		console.warn('toggleStoryMute() - mute button not found')
+		return;
+	}
+
+	el.click();
 }
 
 /**
@@ -371,7 +426,7 @@ function getPrevPost(posts){
  */
 function getNextPost(posts){
 
-	for(post of posts){
+	for(let post of posts){
 
 		var rect = post.getBoundingClientRect();
 
