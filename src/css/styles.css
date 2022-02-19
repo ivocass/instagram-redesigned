@@ -14,6 +14,11 @@ an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
 	top: 45px !important;
 }
 
+/* suggested for you panel + user switch */
+.COOzN.MnWb5._9NEID {
+	display: none;
+}
+
 /* app background */
 .SCxLW.o64aR {
 	background-color: #f1f1f1;
@@ -23,6 +28,11 @@ an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
 ._lz6s.Hz2lF {
 	border-bottom: none;
 	box-shadow: 0 3px 6px rgb(0 0 0 / 0.1), 0 3px 6px rgb(90 90 90 / 10%);
+}
+
+/* fullscreen media viewer with comments*/
+.PdwC2.fXiEu {
+	border-radius: 20px;
 }
 
 /* nav bar search container */
@@ -221,9 +231,22 @@ article._8Rm4L {
 	--main-background-color: #191919;
 }
 
+/* feed post header (new light grey from Insta that breaks Dark Mode)*/
+.dark-theme .UE9AK,
+/* feed post footer (new light grey from Insta that breaks Dark Mode)*/
+.dark-theme .cv3IO,
+/* background of heart, comment, send icons*/
+.dark-theme ._97aPb,
+/* 20211029 new comment section (fullscreen posts, insta now shows larger media) */
+.dark-theme .NvNrm {
+	/* hide the new background color*/
+	background-color: unset !important;
+}
+
 .dark-theme main,
 /* chats main bg */
 .dark-theme .t30g8.L1C6I,
+.dark-theme .oYYFH,
 /* full screen post */
 .dark-theme ._2dDPU.RnrQH.CkGkG,
 /* user avatar */
@@ -247,7 +270,7 @@ article._8Rm4L {
 /* Home post */
 .dark-theme article._8Rm4L,
 /* navigation bar */
-.dark-theme ._lz6s.Hz2lF,
+.dark-theme ._lz6s,
 /* report options */
 .dark-theme ._1XyCr,
 /* search results menu */
@@ -287,15 +310,22 @@ article._8Rm4L {
 .dark-theme section.gwgGR,
 /* followers and following modal */
 .dark-theme .PZuss,
+/* not found page background */
+.dark-theme .tHaIX.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm,
 /* Direct "You blocked Instagrammer." */
 .dark-theme .tHaIX.Igw0E.rBNOH.YBx95._4EzTm {
 	background-color: var(--dark-surface);
 }
 
+/* story side paddings */
+.dark-theme .szopg {
+	border-color: transparent;
+}
+
 /* full screen media date and comment input section */
 .dark-theme .X3Xaj,
 /* full screen media comments section */
-.dark-theme .VHMG0,
+.dark-theme .HP0qD,
 /* full screen media header right */
 .dark-theme ._6aANl,
 /* full screen media header left */
@@ -374,8 +404,13 @@ article._8Rm4L {
 }
 
 /* search bar bg */
-.dark-theme .XTCLo.x3qfX,
-.dark-theme .pbgfb.Di7vw {
+.dark-theme .XTCLo.d_djL.DljaH,
+.dark-theme .cTBqC {
+	background-color: #1a1a1a;
+}
+
+/* search bar suggestion hovered bg */
+.dark-theme .JvDyy {
 	background-color: #1a1a1a;
 }
 
@@ -403,14 +438,20 @@ article._8Rm4L {
 	filter: invert(1);
 }
 
+/* prev/next btn in fullscreen media viewer */
+.dark-theme .feth3 {
+	background-color: black;
+}
+
 /* logo in stories. target logo class inside link (which only happens in story mode)*/
 .dark-theme a > .s4Iyt {
 	filter: invert(0);
 }
 
 /* overlay blocker */
-.dark-theme .RnEpo.Yx5HN {
-	background-color: #1c1c1ca3;
+.dark-theme ._32yJO {
+	/*background-color: #1c1c1ca3;*/
+	background-color: #e1e1e136;
 }
 
 .dark-theme a,
@@ -435,6 +476,7 @@ article._8Rm4L {
 
 .dark-theme svg {
 	fill: white;
+	color: white;
 }
 
 /* ---- dark theme ---- */
