@@ -177,7 +177,7 @@ function mouseOverListener(e) {
 	}
 
 	// if hovering a post with an image or a post with a video
-	if (e.target.classList.contains("_9AhH0") || e.target.classList.contains("fXIG0")) {
+	if (e.target.classList.contains("_9AhH0") || (e.target.classList.contains("fXIG0") && getIsViewingSinglePost())) {
 		e.target.appendChild(openMediaButton);
 		openMediaButton.classList.remove('story');
 	} else {
@@ -185,6 +185,10 @@ function mouseOverListener(e) {
 			openMediaButton.parentElement.removeChild(openMediaButton);
 		}
 	}
+}
+
+function getIsViewingSinglePost(){
+	return window.location.pathname.includes("/p/");
 }
 
 // get the source for the image or video and open it in a new tab
@@ -238,18 +242,52 @@ function openMediaButtonClickListener(e) {
 		// assume we're hovering a post with a video
 		grandParent = e.target.closest("article");
 
-		if (grandParent) {
-			let video = grandParent.querySelector("video");
+		// if it's a single post
+		if (grandParent && window.location.pathname.includes('/p/')) {
 
-			if (video) {
-				// the timeout prevents a bug where the video starts playing and pausing indefinitely
-				// it allows the click to pause the video normally.
-				setTimeout(() => {
-					window.open(video.src);
-				}, 200);
-			}
+			// add the code that will return the video's data
+			let url = window.location +  '?__a=1';
+		
+			fetch(url)
+			.then(res => res.json())
+			.then(obj =>{
+				
+				// get the video's url, then open it in a new tab
+				if (obj && obj.items && obj.items[0]) {
+					
+					// if video_versions is directly accessible
+					if (obj.items[0].video_versions && obj.items[0].video_versions[0]) {
+						url =  obj.items[0].video_versions[0].url;
+					}
+					else
+					// check if it's inside carousel_media
+					if (obj.items[0].carousel_media && obj.items[0].carousel_media[0].video_versions
+						&& obj.items[0].carousel_media[0].video_versions[0]) {
+						
+						url = obj.items[0].carousel_media[0].video_versions[0].url;
+					}
+					else{
+						console.error('Redesign for Instagram - video_versions not available');
+					}					
+					
+					if (url.startsWith('https://instagram')) {
+								
+						window.open(url)
+					}
+				}
+			})
+			.catch(err => 
+			console.error('Redesign for Instagram - Error fetching video data'));
 		}
 	}
+}
+
+function onLoaded(){
+	console.log('onLoaded')
+	window.location.reload()
+
+	window.removeEventListener("load", onLoaded);
+	console.log('end')
 }
 
 function showStoryButtons() {

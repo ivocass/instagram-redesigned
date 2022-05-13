@@ -14,9 +14,19 @@ an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
 	top: 45px !important;
 }
 
+/* padding above home stories*/
+div.vdqkn.pn134{
+	opacity: 0;
+}
+
 /* suggested for you panel + user switch */
 .COOzN.MnWb5._9NEID {
 	display: none;
+}
+
+/* main content background */
+.CZW53.N2s2W {
+	background: none;
 }
 
 /* app background */
@@ -93,14 +103,8 @@ an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
 	box-shadow: 0px 0px 0 2px #f1f1f1;
 }
 
-/* prev & next stories buttons */
-.POSa_.oevZr,
-._6CZji.oevZr {
-	display: none;
-}
-
 /* main content container */
-._1SP8R.C3uDN.j9XKR {
+._1SP8R.j9XKR.AIDOf {
 	max-width: 645px !important;
 }
 
@@ -160,7 +164,7 @@ article._8Rm4L {
 }
 
 #custom-next-stories-button {
-	left: calc(50% + 330px);
+	left: calc(50% + 300px);
 }
 
 .custom-stories-button-img {
