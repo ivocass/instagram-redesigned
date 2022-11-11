@@ -1,17 +1,7 @@
-/* these two fix an actual Instagram bug, where usernames under a story circle need
+/* this fixes an actual Instagram bug, where usernames under a story circle need
 an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
-.ku8Bn {
-	height: 85px !important;
-	margin-left: -5px;
-}
-.eebAO.h_uhZ {
-	line-height: 15px;
-	height: 16px;
-}
-
-/* fixes an instagram bug where the quick search results dropdown is covering the search input */
-.drKGC {
-	top: 45px !important;
+._aauo {
+	height: 86px !important;
 }
 
 /* padding above home stories*/
@@ -19,69 +9,50 @@ div.vdqkn.pn134{
 	opacity: 0;
 }
 
+#toggle-dark-theme-button {
+	display: flex;
+	align-items: center;
+	height: 37px;
+
+	background: none;
+	border: none;
+	text-align: left;
+	padding-left: 16px;
+	cursor: pointer;
+}
+
+#toggle-dark-theme-button img {
+	width: 16px;
+	height: 16px;
+	padding-right: 12px;
+}
+
+#toggle-dark-theme-button:hover {
+	background-color: #fafafa;
+}
+
 /* suggested for you panel + user switch */
-.COOzN.MnWb5._9NEID {
+._aak6._aak7._aak8._aak9._aaka {
 	display: none;
 }
 
-/* main content background */
-.CZW53.N2s2W {
-	background: none;
-}
-
-/* app background */
-.SCxLW.o64aR {
-	background-color: #f1f1f1;
-}
 
 /* navigation bar */
-._lz6s.Hz2lF {
+div._acum {
 	border-bottom: none;
 	box-shadow: 0 3px 6px rgb(0 0 0 / 0.1), 0 3px 6px rgb(90 90 90 / 10%);
 }
 
-/* fullscreen media viewer with comments*/
-.PdwC2.fXiEu {
-	border-radius: 20px;
-}
-
-/* nav bar search container */
-.LWmhU._0aCwM {
-	height: 34px;
-}
 
 /* nav bar search background */
-.pbgfb.Di7vw {
-	border: none;
-	background-color: #f1f1f1;
-	height: 34px;
+._aawh._aawj._aauy {
 	border-radius: 12px;
 }
 
-/* search background when searching */
-.XTCLo.x3qfX {
-	border: none;
-	background: #f1f1f1;
-	border-radius: 10px;
-}
 
-/* search icon when searching */
-.mlrQa.coreSpriteSearchIcon {
-	top: 13px;
-}
-
-/* close search button */
-.aIYm8.coreSpriteSearchClear {
-	top: 7px;
-}
-
-/* nav bar right-side buttons container */
-._47KiJ {
-	align-items: center;
-}
 
 /* stories box */
-.zGtbP.IPQK5.VideM {
+._aac4._aac5._aac6._aac7 {
 	border: none;
 	border-bottom: none;
 	background: none;
@@ -90,7 +61,7 @@ div.vdqkn.pn134{
 }
 
 /* story circle */
-.RR-M-.QN629:hover {
+._aarf._aama:hover {
 	border-radius: 50%;
 	box-shadow: -1px 3px 6px 3px rgb(117 117 117 / 50%);
 
@@ -98,38 +69,27 @@ div.vdqkn.pn134{
 	transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* story image */
+/* story image 
 ._2dbep {
 	box-shadow: 0px 0px 0 2px #f1f1f1;
-}
+}*/
+
 
 /* main content container */
-._1SP8R.j9XKR.AIDOf {
-	max-width: 645px !important;
+._aalv._aalx._aalz,
+/* center main content*/
+._aam1._aam2._aam5 {
+	max-width: 635px !important;
 }
 
-/* posts column */
-.cGcGK {
-	max-width: 645px !important;
-	margin-right: 0 !important;
-}
-
-/* suggestions column */
-.COOzN.MnWb5.YT6rB {
-	display: none !important;
-}
 
 /* post */
-article._8Rm4L {
+article._aalr._aals._aalt._aatb._aatc._aate._aatf._aath._aati {
 	border: none !important;
 	border-radius: 15px !important;
 	box-shadow: 0 3px 6px rgb(0 0 0 / 0.1), 0 3px 6px rgb(90 90 90 / 10%);
 }
 
-/* suggestions box */
-._8Rm4L.vboSt._6E_wP.ccgHY.GZkEI {
-	border-radius: 15px !important;
-}
 
 .custom-stories-button {
 	position: absolute;
@@ -204,283 +164,3 @@ article._8Rm4L {
 	right: 22px;
 	top: 66px;
 }
-
-#toggle-dark-theme-button {
-	display: flex;
-	align-items: center;
-	height: 37px;
-
-	background: none;
-	border: none;
-	text-align: left;
-	padding-left: 16px;
-	cursor: pointer;
-}
-
-#toggle-dark-theme-button img {
-	width: 16px;
-	height: 16px;
-	padding-right: 12px;
-}
-
-#toggle-dark-theme-button:hover {
-	background-color: #fafafa;
-}
-
-/* ---- dark theme ---- */
-
-.dark-theme {
-	--dark-surface: #080808;
-	--border-color: #262626;
-	--main-background-color: #191919;
-}
-
-/* feed post header (new light grey from Insta that breaks Dark Mode)*/
-.dark-theme .UE9AK,
-/* feed post footer (new light grey from Insta that breaks Dark Mode)*/
-.dark-theme .cv3IO,
-/* background of heart, comment, send icons*/
-.dark-theme ._97aPb,
-/* 20211029 new comment section (fullscreen posts, insta now shows larger media) */
-.dark-theme .NvNrm {
-	/* hide the new background color*/
-	background-color: unset !important;
-}
-
-.dark-theme main,
-/* chats main bg */
-.dark-theme .t30g8.L1C6I,
-.dark-theme .oYYFH,
-/* full screen post */
-.dark-theme ._2dDPU.RnrQH.CkGkG,
-/* user avatar */
-.dark-theme ._2dbep {
-	background-color: var(--main-background-color) !important;
-}
-
-/* story image */
-.dark-theme ._2dbep {
-	box-shadow: 0px 0px 0 2px var(--main-background-color);
-}
-
-/* navigation bar */
-.dark-theme ._lz6s.Hz2lF,
-/* Home post */
-.dark-theme article._8Rm4L {
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.52), 0 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-.dark-theme html,
-/* Home post */
-.dark-theme article._8Rm4L,
-/* navigation bar */
-.dark-theme ._lz6s,
-/* report options */
-.dark-theme ._1XyCr,
-/* search results menu */
-.dark-theme .fuqBx,
-/* username hover card */
-.dark-theme .DPiy6.Igw0E.IwRSH.eGOV_._4EzTm,
-.dark-theme article.M9sTE,
-/* nav bar user menu */
-.dark-theme ._01UL2,
-.dark-theme div.uo5MA,
-/* chat messages bg */
-.dark-theme .DPiy6.Igw0E.IwRSH.eGOV_.vwCYk,
-/* chats list header */
-.dark-theme .S-mcP,
-/* chats list footer */
-.dark-theme .Igw0E.rBNOH.YBx95._4EzTm.HVWg4,
-/* private account header */
-.dark-theme ._4Kbb_._54f4m,
-/* suggestions item */
-.dark-theme .Igw0E.rBNOH.eGOV_._4EzTm.L-sTb.HcJZg,
-/* suggestions */
-.dark-theme .tHaIX.Igw0E.IwRSH.eGOV_.vwCYk.HcJZg,
-/* chats list hidden bg */
-.dark-theme div.N9abW,
-.dark-theme footer,
-/* activity menu */
-.dark-theme .Fh4P2,
-/* get mobile app promo */
-.dark-theme div.JLbVX,
-/* settings main panel */
-.dark-theme .BvMHM.EzUlV.XfvCs,
-.dark-theme .NP414.ccgHY.GZkEI,
-/* home suggested friends box */
-.dark-theme div._8Rm4L,
-/* live chat */
-.dark-theme header.inl0k,
-.dark-theme section.gwgGR,
-/* followers and following modal */
-.dark-theme .PZuss,
-/* not found page background */
-.dark-theme .tHaIX.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm,
-/* Direct "You blocked Instagrammer." */
-.dark-theme .tHaIX.Igw0E.rBNOH.YBx95._4EzTm {
-	background-color: var(--dark-surface);
-}
-
-/* story side paddings */
-.dark-theme .szopg {
-	border-color: transparent;
-}
-
-/* full screen media date and comment input section */
-.dark-theme .X3Xaj,
-/* full screen media comments section */
-.dark-theme .HP0qD,
-/* full screen media header right */
-.dark-theme ._6aANl,
-/* full screen media header left */
-.dark-theme .Ppjfr.C-A2M._3jv2A ,
-/* full screen media header options div */
-.dark-theme .M6PK7,
-/* full screen media footer */
-.dark-theme .ltpMr._96JFA.t6Mad,
-/* full screen media likes area */
-.dark-theme .EDfFK.-psZt {
-	background-color: #151515;
-}
-
-/* full screen media overlay blocker */
-.dark-theme ._2dDPU._4RgK.CkGkG {
-	background-color: rgba(0, 0, 0, 0.91);
-}
-
-/* comment report btn, profile options btn*/
-.dark-theme button.wpO6b,
-.dark-theme ._4l6NB {
-	background: none;
-}
-
-/* outgoing chat message */
-.dark-theme ._6FEQj.CMoMH.RQUXn._8_yLp {
-	background-color: #1a1a1a;
-}
-
-/* chat reaction */
-.dark-theme ._31sg7._9BIwZ {
-	background-color: #2f2f2f;
-}
-
-/* nav bar user menu */
-.dark-theme div.uo5MA {
-	box-shadow: 0 0px 6px rgba(128, 128, 128, 0.41), 0 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* search results menu item */
-.dark-theme .yCE8d,
-.dark-theme section,
-.dark-theme header {
-	border-color: var(--border-color);
-}
-
-/* search results menu button hovered */
-.dark-theme .yCE8d.JvDyy,
-/* current chat */
-.dark-theme .QOqBd.Igw0E.IwRSH.eGOV_._4EzTm {
-	background-color: #1a1a1a;
-}
-
-.dark-theme .custom-stories-button {
-	background-color: unset;
-}
-
-/* nav bar user menu button */
-.dark-theme a.-qQT3:hover,
-/* log out button */
-.dark-theme div.-qQT3:hover,
-/* settings left panel btn */
-.dark-theme .h-aRd.fuQUr:hover {
-	background-color: #1a1a1a;
-}
-
-/* shadow below log out button */
-.dark-theme .TOh1s {
-	display: none;
-}
-
-.dark-theme #toggle-dark-theme-button:hover,
-/* multiple users chat chip */
-.dark-theme div._6Rvw2._6YLdr {
-	background-color: #1a1a1a;
-}
-
-/* search bar bg */
-.dark-theme .XTCLo.d_djL.DljaH,
-.dark-theme .cTBqC {
-	background-color: #1a1a1a;
-}
-
-/* search bar suggestion hovered bg */
-.dark-theme .JvDyy {
-	background-color: #1a1a1a;
-}
-
-/* report buttons */
-.dark-theme button.aOOlW,
-.dark-theme div {
-	border-color: var(--border-color);
-}
-
-/* logo */
-.dark-theme .s4Iyt,
-.dark-theme .custom-stories-button,
-.dark-theme #toggle-dark-theme-button img,
-/* nav bar user menu arrow */
-.dark-theme .AvhYw.nLL4f,
-/* suggestions paging button */
-.dark-theme .Kf8kP.coreSpritePagingChevron,
-.dark-theme .glyphsSpriteDirect__outline__96,
-.dark-theme .felixSpriteProfileChannelNullState,
-.dark-theme .glyphsSpriteCamera__outline__24__grey_9,
-.dark-theme .coreSpriteTaggedNull,
-.dark-theme .glyphsSpriteFriend_Follow,
-.dark-theme .coreSpriteDropdownArrowGrey9,
-.dark-theme .coreSpriteSaveNull {
-	filter: invert(1);
-}
-
-/* prev/next btn in fullscreen media viewer */
-.dark-theme .feth3 {
-	background-color: black;
-}
-
-/* logo in stories. target logo class inside link (which only happens in story mode)*/
-.dark-theme a > .s4Iyt {
-	filter: invert(0);
-}
-
-/* overlay blocker */
-.dark-theme ._32yJO {
-	/*background-color: #1c1c1ca3;*/
-	background-color: #e1e1e136;
-}
-
-.dark-theme a,
-.dark-theme span,
-.dark-theme div,
-.dark-theme button,
-.dark-theme input,
-.dark-theme textarea,
-.dark-theme h1,
-.dark-theme h2,
-.dark-theme h3,
-.dark-theme h4,
-.dark-theme label,
-.dark-theme p {
-	color: white !important;
-}
-
-/* hashtags in comments */
-.dark-theme a.xil3i {
-	color: #51bde8 !important;
-}
-
-.dark-theme svg {
-	fill: white;
-	color: white;
-}
-
-/* ---- dark theme ---- */

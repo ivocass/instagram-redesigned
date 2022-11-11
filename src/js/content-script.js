@@ -13,8 +13,8 @@ let openMediaButton;
 let darkThemeButton;
 
 // classes to target the real buttons that cycle the stories in Home
-const PREV_BUTTON_CLASSES = ".POSa_.oevZr";
-const NEXT_BUTTON_CLASSES = "._6CZji.oevZr";
+const PREV_BUTTON_CLASSES = "._aahh._aahj._aahm";
+const NEXT_BUTTON_CLASSES = "._aahi._aahj._aahm";
 
 let intervalId = -1;
 
@@ -26,7 +26,7 @@ function init() {
 	window.addEventListener("blur", removeInterval);
 	addEventListener("keydown", keydownListener);
 
-	addInterval();
+	//addInterval();
 
 	// story-cycling buttons
 	prevStoriesButton = document.createElement("button");
@@ -79,12 +79,15 @@ function init() {
 	darkThemeButton.addEventListener("click", toggleDarkTheme);
 
 	// check the user's dark mode preference and activate dark mode if necessary
-	if (localStorage.getItem(DARK_MODE_ITEM_KEY) === "true") toggleDarkTheme();
+	if (localStorage.getItem(DARK_MODE_ITEM_KEY) === "true" && 
+	window.location.href.indexOf('theme=dark')  === -1) toggleDarkTheme();
 
 	// if the user clicked on the nav bar avatar button, we add the Dark Mode button
 	// to the user options menu
 	document.addEventListener("click", (e) => {
-		if (e.target.tagName === "IMG" && e.target.classList.contains("_6q-tv")) {
+		
+		if (e.target.tagName == "IMG" && e.target.classList.contains("_aa8j")) {
+			
 			// delay adding the button to allow the menu to render
 			setTimeout(addDarkThemeButton, 10);
 		}
@@ -92,7 +95,7 @@ function init() {
 }
 
 function addDarkThemeButton() {
-	let optionsMenu = document.querySelector("._01UL2");
+	let optionsMenu = document.querySelector("._aa61");
 
 	if (!optionsMenu) {
 		return;
@@ -101,6 +104,7 @@ function addDarkThemeButton() {
 	// insert our button above the 'Settings' button
 	optionsMenu.insertBefore(darkThemeButton, optionsMenu.children[2]);
 }
+
 
 // check if we should add the custom story-cycling buttons
 function addInterval() {
@@ -132,7 +136,7 @@ function removeInterval() {
 function mouseOverListener(e) {
 	// check if we should add or remove the open media button when viewing a story
 	if (window.location.pathname.startsWith("/stories/")) {
-		let storyContainer = document.querySelector(".Cd8X1");
+		let storyContainer = document.querySelector("._ac0a");
 		
 		if (!storyContainer) {
 			return;
@@ -167,7 +171,7 @@ function mouseOverListener(e) {
 	}
 
 	// if it's a child of a grid, don't show the button (in case we're on a profile page)
-	if (e.target.closest(".Z666a") || e.target.closest(".ySN3v")) {
+	if (e.target.closest("._aa-i")) {
 		return;
 	}
 
@@ -177,7 +181,7 @@ function mouseOverListener(e) {
 	}
 
 	// if hovering a post with an image or a post with a video
-	if (e.target.classList.contains("_9AhH0") || (e.target.classList.contains("fXIG0") && getIsViewingSinglePost())) {
+	if (e.target.classList.contains("_aagw") || (e.target.classList.contains("_aakl") && getIsViewingSinglePost())) {
 		e.target.appendChild(openMediaButton);
 		openMediaButton.classList.remove('story');
 	} else {
@@ -197,7 +201,7 @@ function openMediaButtonClickListener(e) {
 
 	// if viewing a story
 	if (window.location.pathname.indexOf("/stories/") === 0) {
-		let grandParent = document.querySelector(".Cd8X1");
+		let grandParent = document.querySelector("._ac0a");
 
 		if (grandParent) {
 			// assume the story contains a video, so search for a 'source' element
@@ -227,7 +231,7 @@ function openMediaButtonClickListener(e) {
 		}
 	} else {
 		// assume we're hovering a post with an image
-		let grandParent = e.target.closest(".eLAPa");
+		let grandParent = e.target.closest("._aagu");
 
 		if (grandParent) {
 			let img = grandParent.querySelector("img");
@@ -245,6 +249,17 @@ function openMediaButtonClickListener(e) {
 		// if it's a single post
 		if (grandParent && window.location.pathname.includes('/p/')) {
 
+			
+			let vid = grandParent.querySelector("video");
+
+			if (vid) {
+				window.open(vid.src);
+
+				return;
+			}
+
+			return;
+			
 			// add the code that will return the video's data
 			let url = window.location +  '?__a=1';
 		
@@ -283,15 +298,15 @@ function openMediaButtonClickListener(e) {
 }
 
 function onLoaded(){
-	console.log('onLoaded')
+	
 	window.location.reload()
 
 	window.removeEventListener("load", onLoaded);
-	console.log('end')
+	
 }
 
 function showStoryButtons() {
-	let buttonsParent = document.querySelector(".SCxLW.o64aR");
+	let buttonsParent = document.querySelector("._aam1._aam2._aam3._aam5");
 
 	if (buttonsParent) {
 		buttonsParent.appendChild(prevStoriesButton);
@@ -321,8 +336,8 @@ function storyButtonClickListener(type) {
 // this check is made only after using the prev/next stories buttons. if it was done
 // in the permanent interval, it would consume more resources.
 function updateButtonsStyle() {
-	updateButtonStyle(".POSa_.oevZr", "#custom-prev-stories-button-img");
-	updateButtonStyle("._6CZji.oevZr", "#custom-next-stories-button-img");
+	updateButtonStyle(PREV_BUTTON_CLASSES, "#custom-prev-stories-button-img");
+	updateButtonStyle(NEXT_BUTTON_CLASSES, "#custom-next-stories-button-img");
 }
 
 // show the button as enabled and disabled when appropriate.
@@ -347,16 +362,25 @@ function updateButtonStyle(realBtnClass, buttonImgId) {
 
 // add or remove the class "dark-theme" from body and change a css variable in :root
 function toggleDarkTheme() {
-	if (document.body.classList.contains("dark-theme")) {
-		document.body.classList.remove("dark-theme");
+	
+	let newUrl = new URL(window.location.href);
 
+	if (window.location.href.indexOf('theme=dark') > -1) {
+				
 		localStorage.setItem(DARK_MODE_ITEM_KEY, "false");
-	} else {
-		document.body.classList.add("dark-theme");
 
+		newUrl.searchParams.delete('theme');		
+		
+	} else {
+		
 		localStorage.setItem(DARK_MODE_ITEM_KEY, "true");
+
+		newUrl.searchParams.append('theme', 'dark');
 	}
+
+	window.location.replace(newUrl.href)
 }
+
 
 /**
  * Listen for the keys J and K on the homepage, then scroll to the next or previous post.
