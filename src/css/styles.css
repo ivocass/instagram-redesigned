@@ -1,148 +1,22 @@
-/* this fixes an actual Instagram bug, where usernames under a story circle need
-an extra pixel to avoid clipping descending characters (letters p,q,g,y,j)*/
-._aauo {
-	height: 86px !important;
-}
-
-/* padding above home stories*/
-div.vdqkn.pn134{
-	opacity: 0;
-}
-
-#toggle-dark-theme-button {
-	display: flex;
-	align-items: center;
-	height: 37px;
-
-	background: none;
-	border: none;
-	text-align: left;
-	padding-left: 16px;
-	cursor: pointer;
-}
-
-#toggle-dark-theme-button img {
-	width: 16px;
-	height: 16px;
-	padding-right: 12px;
-}
-
-#toggle-dark-theme-button:hover {
-	background-color: #fafafa;
-}
-
 /* suggested for you panel + user switch */
-._aak6._aak7._aak8._aak9._aaka {
+._aak6{
 	display: none;
-}
-
-
-/* navigation bar */
-div._acum {
-	border-bottom: none;
-	box-shadow: 0 3px 6px rgb(0 0 0 / 0.1), 0 3px 6px rgb(90 90 90 / 10%);
-}
-
-
-/* nav bar search background */
-._aawh._aawj._aauy {
-	border-radius: 12px;
 }
 
 
 
 /* stories box */
-._aac4._aac5._aac6._aac7 {
+._aac4._aac5._aac6 {
 	border: none;
-	border-bottom: none;
 	background: none;
-	padding: 0;
-	left: -3px;
 }
-
-/* story circle */
-._aarf._aama:hover {
-	border-radius: 50%;
-	box-shadow: -1px 3px 6px 3px rgb(117 117 117 / 50%);
-
-	transform: scale(1.05);
-	transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-
-/* story image 
-._2dbep {
-	box-shadow: 0px 0px 0 2px #f1f1f1;
-}*/
 
 
 /* main content container */
 ._aalv._aalx._aalz,
 /* center main content*/
 ._aam1._aam2._aam5 {
-	max-width: 635px !important;
-}
-
-
-/* post */
-article._aalr._aals._aalt._aatb._aatc._aate._aatf._aath._aati {
-	border: none !important;
-	border-radius: 15px !important;
-	box-shadow: 0 3px 6px rgb(0 0 0 / 0.1), 0 3px 6px rgb(90 90 90 / 10%);
-}
-
-
-.custom-stories-button {
-	position: absolute;
-	top: 46px;
-	width: 35px;
-	height: 35px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: none;
-	border-radius: 50%;
-	cursor: pointer;
-	transition: opacity 0.2s ease-in-out;
-}
-
-.custom-stories-button:hover {
-	background-color: white;
-}
-
-.custom-stories-button.disabled {
-	cursor: default;
-	background: none;
-}
-
-#custom-prev-stories-button {
-	left: calc(50% - 365px);
-	transform: rotate(180deg);
-}
-
-#custom-prev-stories-button-img {
-	opacity: 0.4;
-}
-
-#custom-next-stories-button {
-	left: calc(50% + 300px);
-}
-
-.custom-stories-button-img {
-	position: relative;
-	left: 1px;
-}
-
-.fade-in {
-	animation: fade-in ease 0.5s;
-}
-
-@keyframes fade-in {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+	max-width: 700px !important;
 }
 
 #open-media-button {

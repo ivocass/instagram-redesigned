@@ -1,57 +1,17 @@
-// the localStorage key to remember the user's dark mode preference
-const DARK_MODE_ITEM_KEY = "instagram-dark-mode-enabled";
 
 // paths to the icons
-const CHEVRON_ICON_SOURCE = chrome.runtime.getURL("assets/chevron.png");
 const OPEN_MEDIA_ICON_SOURCE = chrome.runtime.getURL("assets/open-media.png");
-const DARK_THEME_ICON_SOURCE = chrome.runtime.getURL("assets/dark-theme-icon.png");
 
 // we reuse the buttons intead of creating them every time
-let prevStoriesButton;
-let nextStoriesButton;
 let openMediaButton;
-let darkThemeButton;
-
-// classes to target the real buttons that cycle the stories in Home
-const PREV_BUTTON_CLASSES = "._aahh._aahj._aahm";
-const NEXT_BUTTON_CLASSES = "._aahi._aahj._aahm";
-
-let intervalId = -1;
 
 init();
 
 function init() {
-	// use the timer only when the tab is active
-	window.addEventListener("focus", addInterval);
-	window.addEventListener("blur", removeInterval);
+	
 	addEventListener("keydown", keydownListener);
 
-	//addInterval();
 
-	// story-cycling buttons
-	prevStoriesButton = document.createElement("button");
-	nextStoriesButton = document.createElement("button");
-
-	prevStoriesButton.id = "custom-prev-stories-button";
-	nextStoriesButton.id = "custom-next-stories-button";
-	prevStoriesButton.className = "custom-stories-button";
-	nextStoriesButton.className = "custom-stories-button";
-
-	prevStoriesButton.addEventListener("click", () => storyButtonClickListener("prev"));
-	nextStoriesButton.addEventListener("click", () => storyButtonClickListener("next"));
-
-	// the chevron icons
-	let prevImg = document.createElement("img");
-	let nextImg = document.createElement("img");
-	prevImg.id = "custom-prev-stories-button-img";
-	nextImg.id = "custom-next-stories-button-img";
-	prevImg.src = CHEVRON_ICON_SOURCE;
-	nextImg.src = CHEVRON_ICON_SOURCE;
-	prevImg.className = "custom-stories-button-img disabled";
-	nextImg.className = "custom-stories-button-img";
-
-	prevStoriesButton.appendChild(prevImg);
-	nextStoriesButton.appendChild(nextImg);
 
 	openMediaButton = document.createElement("button");
 	openMediaButton.id = "open-media-button";
@@ -63,75 +23,9 @@ function init() {
 	let openMediaImg = document.createElement("img");
 	openMediaImg.src = OPEN_MEDIA_ICON_SOURCE;
 	openMediaButton.appendChild(openMediaImg);
-
-	darkThemeButton = document.createElement("button");
-	darkThemeButton.id = "toggle-dark-theme-button";
-
-	let darkThemeButtonIcon = document.createElement("img");
-	darkThemeButtonIcon.src = DARK_THEME_ICON_SOURCE;
-	darkThemeButton.appendChild(darkThemeButtonIcon);
-
-	let darkThemeButtonText = document.createElement("span");
-	darkThemeButtonText.innerText = "Dark mode";
-
-	darkThemeButton.appendChild(darkThemeButtonText);
-
-	darkThemeButton.addEventListener("click", toggleDarkTheme);
-
-	// check the user's dark mode preference and activate dark mode if necessary
-	if (localStorage.getItem(DARK_MODE_ITEM_KEY) === "true" && 
-	window.location.href.indexOf('theme=dark')  === -1) toggleDarkTheme();
-
-	// if the user clicked on the nav bar avatar button, we add the Dark Mode button
-	// to the user options menu
-	document.addEventListener("click", (e) => {
-		
-		if (e.target.tagName == "IMG" && e.target.classList.contains("_aa8j")) {
-			
-			// delay adding the button to allow the menu to render
-			setTimeout(addDarkThemeButton, 10);
-		}
-	});
-}
-
-function addDarkThemeButton() {
-	let optionsMenu = document.querySelector("._aa61");
-
-	if (!optionsMenu) {
-		return;
-	}
-
-	// insert our button above the 'Settings' button
-	optionsMenu.insertBefore(darkThemeButton, optionsMenu.children[2]);
 }
 
 
-// check if we should add the custom story-cycling buttons
-function addInterval() {
-	// don't add the inverval twice
-	if (intervalId !== -1) {
-		return;
-	}
-
-	intervalId = setInterval(() => {
-		// if one of our custom buttons is on screen
-		if (document.querySelector(".custom-stories-button")) {
-			return;
-		}
-
-		// look for the stories container. if not on the screen, no need to add our buttons
-		if (!document.querySelector(".ku8Bn")) {
-			return;
-		}
-
-		showStoryButtons();
-	}, 1000);
-}
-
-function removeInterval() {
-	clearInterval(intervalId);
-	intervalId = -1;
-}
 
 function mouseOverListener(e) {
 	// check if we should add or remove the open media button when viewing a story
@@ -297,89 +191,7 @@ function openMediaButtonClickListener(e) {
 	}
 }
 
-function onLoaded(){
-	
-	window.location.reload()
 
-	window.removeEventListener("load", onLoaded);
-	
-}
-
-function showStoryButtons() {
-	let buttonsParent = document.querySelector("._aam1._aam2._aam3._aam5");
-
-	if (buttonsParent) {
-		buttonsParent.appendChild(prevStoriesButton);
-		buttonsParent.appendChild(nextStoriesButton);
-
-		prevStoriesButton.classList.add("fade-in");
-		nextStoriesButton.classList.add("fade-in");
-	}
-}
-
-// forward the click to the real button, which is hidden
-function storyButtonClickListener(type) {
-	let classes = type === "prev" ? PREV_BUTTON_CLASSES : NEXT_BUTTON_CLASSES;
-
-	let realBtn = document.querySelector(classes);
-
-	// better with debounce but it's fine
-	setTimeout(updateButtonsStyle, 1000);
-
-	if (!realBtn) {
-		return;
-	}
-
-	realBtn.click();
-}
-
-// this check is made only after using the prev/next stories buttons. if it was done
-// in the permanent interval, it would consume more resources.
-function updateButtonsStyle() {
-	updateButtonStyle(PREV_BUTTON_CLASSES, "#custom-prev-stories-button-img");
-	updateButtonStyle(NEXT_BUTTON_CLASSES, "#custom-next-stories-button-img");
-}
-
-// show the button as enabled and disabled when appropriate.
-function updateButtonStyle(realBtnClass, buttonImgId) {
-	let realBtn = document.querySelector(realBtnClass);
-	let btnImg = document.querySelector(buttonImgId);
-
-	// if the real button exists, show ours as enabled
-	if (realBtn) {
-		if (btnImg) {
-			btnImg.style.opacity = 1;
-
-			btnImg.parentElement.classList.remove("disabled");
-		}
-	} else {
-		if (btnImg) {
-			btnImg.style.opacity = 0.4;
-			btnImg.parentElement.classList.add("disabled");
-		}
-	}
-}
-
-// add or remove the class "dark-theme" from body and change a css variable in :root
-function toggleDarkTheme() {
-	
-	let newUrl = new URL(window.location.href);
-
-	if (window.location.href.indexOf('theme=dark') > -1) {
-				
-		localStorage.setItem(DARK_MODE_ITEM_KEY, "false");
-
-		newUrl.searchParams.delete('theme');		
-		
-	} else {
-		
-		localStorage.setItem(DARK_MODE_ITEM_KEY, "true");
-
-		newUrl.searchParams.append('theme', 'dark');
-	}
-
-	window.location.replace(newUrl.href)
-}
 
 
 /**
@@ -389,15 +201,6 @@ function toggleDarkTheme() {
 function keydownListener(e){
 
 	const key = e.key.toUpperCase();
-
-	if (key === 'M' && window.location.pathname.startsWith("/stories/") && 
-	e.target.tagName !== "TEXTAREA" &&
-	e.target.tagName !== 'INPUT'){
-		
-		
-		toggleStoryMute()
-		return;
-	}
 	
 	// ignore input fields, only work on the homepage and for letters J,K,F,D
 	if (e.target.tagName === "TEXTAREA" || 
@@ -428,41 +231,6 @@ function keydownListener(e){
 
 }
 
-
-function toggleStoryMute(){
-
-	// we use this technique instead of targetting css classes because the classes will eventually
-	// change.
-	let el = document.querySelector('header');
-
-	if (!el) {
-		console.warn('toggleStoryMute() - header not found')
-		return;
-	}
-
-	el = el.childNodes[1];
-
-	if (!el) {
-		console.warn('toggleStoryMute() - header child not found')
-		return;
-	}
-
-	el = el.childNodes[1];
-
-	if (!el) {
-		console.warn('toggleStoryMute() - header grandchild not found')
-		return;
-	}
-
-	el = el.childNodes[1];
-
-	if (!el) {
-		console.warn('toggleStoryMute() - mute button not found')
-		return;
-	}
-
-	el.click();
-}
 
 /**
  * return the first post that has its top above the navbar
