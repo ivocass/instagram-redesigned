@@ -1,194 +1,209 @@
 
 // paths to the icons
-const OPEN_MEDIA_ICON_SOURCE = chrome.runtime.getURL("assets/open-media.png");
+const openMediaIconSource = chrome.runtime.getURL("assets/open-media.png");
+const videoErrorMsg = 'Download unavailable for this video.\n Try https://snapinsta.app';
 
-// we reuse the buttons intead of creating them every time
-let openMediaButton;
+
+const openMediaButton = document.createElement("button");
+
+const typeImage = 'typeImage';
+const typeVideo = 'typeVideo';
 
 init();
 
 function init() {
 	
-	addEventListener("keydown", keydownListener);
-
-
-
-	openMediaButton = document.createElement("button");
-	openMediaButton.id = "open-media-button";
-	openMediaButton.title = "Open media in new tab";
-	openMediaButton.addEventListener("click", openMediaButtonClickListener);
-	document.addEventListener("mouseover", mouseOverListener);
-
-	// button icon
 	let openMediaImg = document.createElement("img");
-	openMediaImg.src = OPEN_MEDIA_ICON_SOURCE;
+	openMediaImg.src = openMediaIconSource;
+
+	openMediaButton.id = "open-media-button";
+	openMediaButton.title = "Open media in new tab";	
 	openMediaButton.appendChild(openMediaImg);
+
+	openMediaButton.addEventListener("click", openMediaButtonClickListener);
+	document.addEventListener("keydown", keydownListener);
+	document.addEventListener("mouseover", mouseOverListener);
 }
 
 
 
 function mouseOverListener(e) {
-	// check if we should add or remove the open media button when viewing a story
-	if (window.location.pathname.startsWith("/stories/")) {
-		let storyContainer = document.querySelector("._ac0a");
-		
-		if (!storyContainer) {
-			return;
-		}
 
-		let bounds = storyContainer.getBoundingClientRect();
-		
-		// if we're inside the bounds of the story media (bounds increased by one pixel to make
-		// sure it works)
-		if (
-			e.clientX >= bounds.left - 1 &&
-			e.clientX <= bounds.right + 1 &&
-			e.clientY >= bounds.top - 1 &&
-			e.clientY <= bounds.bottom + 1
-		) {
-			
-			// if we're over the story media and the button is not added
-			if (!storyContainer.contains(openMediaButton)) {
-				
-				storyContainer.appendChild(openMediaButton);
-				openMediaButton.classList.add('story');
-			}
-		} else {
-			
-			if (openMediaButton.parentElement) {
-				
-				openMediaButton.parentElement.removeChild(openMediaButton);
-			}
-		}
-
-		return;
-	}
-
-	// if it's a child of a grid, don't show the button (in case we're on a profile page)
-	if (e.target.closest("._aa-i")) {
-		return;
-	}
-
-	// ignore the button itself. otherwise hovering it would end up removing it
+	// ignore the button itself (otherwise hovering it would end up removing it)
 	if (e.target === openMediaButton || e.target === openMediaButton.firstChild) {
 		return;
 	}
 
-	// if hovering a post with an image or a post with a video
-	if (e.target.classList.contains("_aagw") || (e.target.classList.contains("_aakl") && getIsViewingSinglePost())) {
-		e.target.appendChild(openMediaButton);
-		openMediaButton.classList.remove('story');
-	} else {
-		if (openMediaButton.parentElement) {
-			openMediaButton.parentElement.removeChild(openMediaButton);
-		}
+	if (window.location.pathname.startsWith("/stories/")) {
+        handleHoverStory(e);
+	}
+	else{
+        handleHoverPost(e);
 	}
 }
 
-function getIsViewingSinglePost(){
-	return window.location.pathname.includes("/p/");
+function handleHoverStory(e){
+	
+	// get the current story (if there are many, the one enlarged)
+	let storyContainer = document.querySelector("._ac0a");
+	
+	// ig changes the className every now and then
+	if (!storyContainer) {
+		return;
+	}
+
+	// we want to know if the story or its children are hovered
+	storyContainer = storyContainer.querySelector(':hover');
+
+	// if the story media nor its children are hovered
+	if (!storyContainer) {
+
+		if (openMediaButton.parentElement) {
+			openMediaButton.remove();
+		}
+		return;
+	}
+
+	openMediaButton.classList.remove('invalid');
+
+	// if this is a video story, but the video doesn't have a valid src
+	if (storyContainer.querySelector('video') && !hasValidVideo(storyContainer)) {
+        openMediaButton.classList.add('invalid');
+	}
+
+	// if the button is not yet added
+	if (!storyContainer.contains(openMediaButton)) {
+				
+		storyContainer.appendChild(openMediaButton);
+
+		// adjust position
+		openMediaButton.classList.add('story');
+	}
 }
+
+function handleHoverPost(e){
+	
+	const el = e.target;	
+
+	const postType = getPostType(el);
+
+	if (postType === null) {
+
+		if (openMediaButton.parentElement) {
+			openMediaButton.remove();
+		}
+
+		return;
+	}
+
+	openMediaButton.classList.remove('invalid');
+
+	// video targets don't have the actual video as a descendant
+	if (postType === typeVideo) {
+        const post = el.closest('article');
+
+		if (!hasValidVideo(post)) {
+			openMediaButton.classList.add('invalid');
+		}
+	}
+	
+	openMediaButton.classList.remove('story');
+	el.appendChild(openMediaButton)
+	
+}
+
+function getPostType(el){
+
+	switch (true) {
+	
+		// img in feed and profile
+		case el.matches('._aagw'):
+			// ignore children of grids in user profile
+			if (el.closest("article.x1iyjqo2")) {
+				return null;
+			}
+			
+			// ignore children of grids in "More posts from {user}"
+			if (el.closest("._aa6g")) {
+				return null;
+			}
+		return typeImage;
+
+		// video in feed
+		case el.matches('._aakl'):
+		return typeVideo;
+
+		// video in profile
+		case el.matches('.x1ey2m1c.x9f619.xds687c.x10l6tqk.x17qophe.x13vifvy.x1ypdohk'):
+		return typeVideo;
+	}
+
+	return null;
+
+}
+
+// videos with blob sources can only be downloaded manually via the Network debug panel
+function hasValidVideo(el){
+
+	const video = el.tagName.toUpperCase() === 'VIDEO' ? el : el.querySelector("video");
+	
+	if (video && video.src.startsWith('https://')) {
+        return true;
+	}
+	
+	return false;
+}
+
 
 // get the source for the image or video and open it in a new tab
 function openMediaButtonClickListener(e) {
+	
+	// prevent video playback
 	e.preventDefault();
 
-	// if viewing a story
-	if (window.location.pathname.indexOf("/stories/") === 0) {
-		let grandParent = document.querySelector("._ac0a");
-
-		if (grandParent) {
-			// assume the story contains a video, so search for a 'source' element
-			let source = grandParent.querySelector("source");
-
-			if (source) {
-				// the timeout prevents a bug where the video starts playing and pausing indefinitely
-				// this allows the click to go through and pause the original video.
-				setTimeout(() => {
-					window.open(source.src);
-				}, 100);
-			} else {
-				// assume the story contains an image instead
-				let img = grandParent.querySelector("img");
-
-				if (img) {
-
-					// if the image is being cropped into a square, use the first srcset url instead
-					if (img.src.includes('/e35/c0.')) {
-						window.open(img.srcset.slice(0,img.srcset.indexOf(' ')));
-					}
-					else{
-						window.open(img.src);
-					}
-				}
-			}
-		}
-	} else {
-		// assume we're hovering a post with an image
-		let grandParent = e.target.closest("._aagu");
-
-		if (grandParent) {
-			let img = grandParent.querySelector("img");
-
-			if (img) {
-				window.open(img.src);
-
-				return;
-			}
-		}
-
-		// assume we're hovering a post with a video
-		grandParent = e.target.closest("article");
-
-		// if it's a single post
-		if (grandParent && window.location.pathname.includes('/p/')) {
-
-			
-			let vid = grandParent.querySelector("video");
-
-			if (vid) {
-				window.open(vid.src);
-
-				return;
-			}
-
-			return;
-			
-			// add the code that will return the video's data
-			let url = window.location +  '?__a=1';
+	// don't use 'e.target', as it may be the icon inside the button
+	let el = openMediaButton.parentElement;
+	let source;
+	
+	// on posts sometimes the media is not a descendant
+	if (!window.location.pathname.startsWith("/stories/")) {
+		el = el.parentElement.parentElement.parentElement;
 		
-			fetch(url)
-			.then(res => res.json())
-			.then(obj =>{
-				
-				// get the video's url, then open it in a new tab
-				if (obj && obj.items && obj.items[0]) {
-					
-					// if video_versions is directly accessible
-					if (obj.items[0].video_versions && obj.items[0].video_versions[0]) {
-						url =  obj.items[0].video_versions[0].url;
-					}
-					else
-					// check if it's inside carousel_media
-					if (obj.items[0].carousel_media && obj.items[0].carousel_media[0].video_versions
-						&& obj.items[0].carousel_media[0].video_versions[0]) {
-						
-						url = obj.items[0].carousel_media[0].video_versions[0].url;
-					}
-					else{
-						console.error('Redesign for Instagram - video_versions not available');
-					}					
-					
-					if (url.startsWith('https://instagram')) {
-								
-						window.open(url)
-					}
-				}
-			})
-			.catch(err => 
-			console.error('Redesign for Instagram - Error fetching video data'));
-		}
 	}
+	
+	let video = el.querySelector("video");
+
+	if (video) {
+		
+		if (!hasValidVideo(video)) {
+			alert(videoErrorMsg)
+			return;
+		}
+
+		source = video.src;
+	}
+	else{
+		
+		let img = el.querySelector("img");
+
+		if (!img) {
+			return;
+		}
+
+		source = img.src;		
+
+		// if the image is being cropped into a square, use the first srcset url instead
+		if (img.src.includes('/e35/c0.')) {
+			source = img.srcset.slice(0,img.srcset.indexOf(' '));
+			
+		}
+	}	
+
+	// the timeout prevents a bug where the video starts playing and pausing indefinitely
+	// this allows the click to go through and pause the original video.
+	setTimeout(() => {
+		window.open(source);
+	}, 100);
 }
 
 

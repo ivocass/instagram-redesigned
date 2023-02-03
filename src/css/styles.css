@@ -10,9 +10,9 @@
 }
 
 /* main content container */
-._aalv._aalx._ajrr,
+._aalv,
 /* center main content*/
-._aam1._ajrq._aam5._agh3 {
+._aam1 {
 	max-width: 700px !important;
 }
 
@@ -34,4 +34,9 @@
 #open-media-button.story {
 	right: 22px;
 	top: 66px;
+}
+
+#open-media-button.invalid {
+	background-color: #424242;
+	opacity: 0.3;
 }
