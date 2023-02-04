@@ -64,11 +64,14 @@ function handleHoverStory(e){
 		return;
 	}
 
-	openMediaButton.classList.remove('invalid');
-
 	// if this is a video story, but the video doesn't have a valid src
 	if (storyContainer.querySelector('video') && !hasValidVideo(storyContainer)) {
         openMediaButton.classList.add('invalid');
+	}
+	else{
+
+		// if it's an img or a valid video
+		openMediaButton.classList.remove('invalid');   
 	}
 
 	// if the button is not yet added
