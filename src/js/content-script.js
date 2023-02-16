@@ -1,4 +1,5 @@
 
+
 // paths to the icons
 const openMediaIconSource = chrome.runtime.getURL("assets/open-media.png");
 const videoErrorMsg = 'Download unavailable for this video.\n Try https://snapinsta.app';
@@ -8,6 +9,7 @@ const openMediaButton = document.createElement("button");
 
 const typeImage = 'typeImage';
 const typeVideo = 'typeVideo';
+
 
 init();
 
@@ -64,15 +66,7 @@ function handleHoverStory(e){
 		return;
 	}
 
-	// if this is a video story, but the video doesn't have a valid src
-	if (storyContainer.querySelector('video') && !hasValidVideo(storyContainer)) {
-        openMediaButton.classList.add('invalid');
-	}
-	else{
-
-		// if it's an img or a valid video
-		openMediaButton.classList.remove('invalid');   
-	}
+	openMediaButton.classList.remove('invalid');   
 
 	// if the button is not yet added
 	if (!storyContainer.contains(openMediaButton)) {
@@ -170,15 +164,23 @@ function openMediaButtonClickListener(e) {
 	
 	// on posts sometimes the media is not a descendant
 	if (!window.location.pathname.startsWith("/stories/")) {
-		el = el.parentElement.parentElement.parentElement;
-		
+		el = el.parentElement.parentElement.parentElement;		
 	}
 	
 	let video = el.querySelector("video");
 
 	if (video) {
 		
+		
 		if (!hasValidVideo(video)) {
+
+			// in the current function we handle only stories that aren't blobs.
+			// if the video is not valid, then its a blob, so we delegate to fetchAndOpenStory()
+			if (window.location.pathname.startsWith("/stories/")) {
+				fetchAndOpenStory()
+				return;
+			}
+
 			alert(videoErrorMsg)
 			return;
 		}
@@ -209,6 +211,68 @@ function openMediaButtonClickListener(e) {
 	}, 100);
 }
 
+/**
+ * We use Instagram's API to fetch a json with URLs of the user's stories.
+ * This works when the URL has this format: domain/{username}/{story id}
+ */
+async function fetchAndOpenStory(){
+
+	
+	const apiUtils = new InstagramAPIUtils();
+	const username = apiUtils.getUsername();
+	const storyId = apiUtils.getStoryId();
+	const options = apiUtils.getOptions();
+	const userId = await apiUtils.getUserID(options, username);
+	const data = await apiUtils.getStoriesData(userId, options);
+
+
+	if (!data || !data.items || data.items.length === 0) {
+        
+		alert(videoErrorMsg);
+		return;
+	}
+
+	for(let i = 0; i < data.items.length; i++){
+		const item = data.items[i];
+
+		if (item.pk === storyId) {
+        
+			let url = item.video_versions[0].url;
+			
+			if (url && url.startsWith('https://')) {
+
+				// some domains fail with a 'NotSameOrigin' error, but work with the modified domain
+				url = modifyCDNURL(url)
+				window.open(url);
+				return;
+			}
+			break;
+		}
+	}
+
+	alert(videoErrorMsg);
+}
+
+// this is what happens when you dont learn regex
+function modifyCDNURL(url){
+	
+	// there are many servers, like 'fepa10-1', 'fepa10-2', etc
+	if (url.startsWith('https://instagram.fepa10')) {
+        let index = url.indexOf('.net/');
+
+		if (index === -1) {
+			return url;
+		}
+
+		index += 5;
+
+		url = url.slice(index, url.length);
+
+		url = 'https://scontent-ams4-1.cdninstagram.com/' + url;
+	}
+
+	return url;
+}
 
 
 

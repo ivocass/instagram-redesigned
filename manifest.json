@@ -1,8 +1,8 @@
 {
-	"name": "Social Redesign",
-	"version": "0.0.3.8",
-	"description": "A new, modern look for Ig web",
-	"action": {
+	"name": "Instagram redesigned",
+	"version": "0.0.3.9",
+	"description": "A new, modern look for Instagram web",
+	"browser_action": {
 		"default_icon": {
 			"16": "assets/logo16.png",
 			"32": "assets/logo32.png",
@@ -17,10 +17,9 @@
 		"48": "assets/logo48.png",
 		"128": "assets/logo128.png"
 	},
-	"web_accessible_resources": [{
-		"resources": ["assets/open-media.png"],
-			"matches": ["https://www.instagram.com/*"]
-	}],
+	"web_accessible_resources": [
+		"assets/open-media.png"
+	],
 	"content_scripts": [
 		{
 			"matches": [
@@ -30,9 +29,9 @@
 				"src/css/styles.css"
 			],
 			"js": [
-				"src/js/content-script.js"
+				"src/js/InstagramAPIUtils.js", "src/js/content-script.js"
 			]
 		}
-	],	
-	"manifest_version": 3
+	],
+	"manifest_version": 2
 }
