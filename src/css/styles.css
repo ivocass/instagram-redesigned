@@ -1,45 +1,47 @@
 /* suggested for you panel + user switch */
-._aak6{
-	display: none;
+.x1dr59a3.x13vifvy.x3hkoc4 {
+  display: none;
 }
 
 /* stories box */
 ._aac4._aac5._aac6 {
-	border: none;
-	background: none;
+  border: none;
+  background: none;
 }
 
-/* main content container */
-._aalv,
-/* center main content*/
-._aam1,
-/* on 20230208, IG added a max-width to a div with a 
-class "xh8yej3" that matches 42 elements, so we use this selector instead*/
-div[style*="max-width: 470px"] {
-	max-width: 700px !important;
+/* stories box */
+div[style*='max-width: 630px'] {
+  max-width: 700px !important;
+}
+
+/* post media */
+div[style*='width: 468px'],
+/* posts container */
+div[style*='width: 470px'] {
+  width: 700px !important;
 }
 
 #open-media-button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 50%;
-	position: absolute;
-	right: 12px;
-	top: 12px;
-	width: 28px;
-	height: 28px;
-	background-color: #010f1b;
-	border: none;
-	cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 28px;
+  height: 28px;
+  background-color: #010f1b;
+  border: none;
+  cursor: pointer;
 }
 
 #open-media-button.story {
-	right: 22px;
-	top: 66px;
+  right: 22px;
+  top: 66px;
 }
 
 #open-media-button.invalid {
-	background-color: #424242;
-	opacity: 0.3;
+  background-color: #424242;
+  opacity: 0.3;
 }
