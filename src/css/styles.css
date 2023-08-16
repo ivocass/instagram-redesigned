@@ -21,6 +21,13 @@ div[style*='width: 470px'] {
   width: 700px !important;
 }
 
+/* targetting the posts also affects the popup when commenting on a post, so undo
+the changes*/
+.x1qjc9v5.x9f619.x78zum5.xdt5ytf.x1iyjqo2.xl56j7k,
+.x1n2onr6.xzkaem6 {
+  width: 100% !important;
+}
+
 #open-media-button {
   display: flex;
   justify-content: center;
