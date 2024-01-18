@@ -14,11 +14,12 @@ div[style*='max-width: 630px'] {
   max-width: 700px !important;
 }
 
-/* post media */
-div[style*='width: 468px'],
-/* posts container */
-div[style*='width: 470px'] {
-  width: 700px !important;
+/* posts */
+div[style*='min(470px, 100vw)'],
+div[role="button"][aria-hidden="true"][tabindex="0"],
+div._aamn,
+.x1i10hfl ._aagu{
+	width:700px !important;
 }
 
 /* targetting the posts also affects the popup when commenting on a post, so undo
