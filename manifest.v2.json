@@ -1,7 +1,7 @@
 {
-  "name": "Instagram redesigned",
-  "version": "0.0.4.0",
-  "description": "A new, modern look for Instagram web",
+  "name": "Social redesign",
+  "version": "0.0.4.3",
+  "description": "A new, modern look for Ig web",
   "browser_action": {
     "default_icon": {
       "16": "assets/logo16.png",
