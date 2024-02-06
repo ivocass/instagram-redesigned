@@ -1,6 +1,6 @@
 {
   "name": "Social redesign",
-  "version": "0.0.4.3",
+  "version": "0.0.4.4",
   "description": "A new, modern look for Ig web",
   "browser_action": {
     "default_icon": {

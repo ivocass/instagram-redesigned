@@ -126,6 +126,11 @@ function getPostType(el) {
 
 // videos with blob sources can only be downloaded manually via the Network debug panel
 function hasValidVideo(el) {
+
+  if (!el || !el.tagName) {
+    return false;
+  }
+
   const video =
     el.tagName.toUpperCase() === 'VIDEO' ? el : el.querySelector('video');
 
