@@ -19,7 +19,7 @@ div[style*='min(470px, 100vw)'],
 /* this line below deforms the media content when seeing a standalone post (own url).
 it doesn't seem to affect anything right now. will delete later. */
 /* div[role="button"][aria-hidden="true"][tabindex="0"], */
-div._aamn,
+/* div._aamn, */
 .x1i10hfl:not(.xjbqb8w) ._aagu{
 	width:700px !important;
 }
