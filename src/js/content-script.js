@@ -38,10 +38,12 @@ function mouseOverListener(e) {
 
 function handleHoverStory(e) {
   // get the current story (if there are many, the one enlarged)
-  let storyContainer = document.querySelector('._ac0a');
+  // let storyContainer = document.querySelector('._ac0a');
+  let storyContainer = document.querySelector('.x5yr21d');
 
   // ig changes the className every now and then
   if (!storyContainer) {
+    console.warn('no storyContainer')
     return;
   }
 
@@ -256,6 +258,11 @@ function modifyCDNURL(url) {
 function keydownListener(e) {
   const key = e.key.toUpperCase();
 
+  if (key === 'S' && window.location.pathname.startsWith('/stories/')) {
+    fetchAndOpenStory()
+    return;
+  }
+
   // ignore input fields, only work on the homepage and for letters J,K,F,D
   if (
     e.target.tagName === 'TEXTAREA' ||
@@ -265,6 +272,8 @@ function keydownListener(e) {
   ) {
     return;
   }
+
+
 
   let posts = document.querySelectorAll('article');
 

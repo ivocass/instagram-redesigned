@@ -1,6 +1,6 @@
 {
   "name": "Social Redesign",
-  "version": "0.0.4.6",
+  "version": "0.0.4.8",
   "description": "A new, modern look for Ig web",
   "action": {
     "default_icon": {
@@ -19,15 +19,26 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["assets/open-media.png"],
-      "matches": ["https://www.instagram.com/*"]
+      "resources": [
+        "assets/open-media.png"
+      ],
+      "matches": [
+        "https://www.instagram.com/*"
+      ]
     }
   ],
   "content_scripts": [
     {
-      "matches": ["https://www.instagram.com/*"],
-      "css": ["src/css/styles.css"],
-      "js": ["src/js/InstagramAPIUtils.js", "src/js/content-script.js"]
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "css": [
+        "src/css/styles.css"
+      ],
+      "js": [
+        "src/js/InstagramAPIUtils.js",
+        "src/js/content-script.js"
+      ]
     }
   ],
   "manifest_version": 3
